@@ -25,20 +25,18 @@ import bs4
 from langchain.tools.retriever import create_retriever_tool
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
-import streamlit as st
 
 # Load environment variables
-# load_dotenv()
+load_dotenv()
 
 def get_llm():
     """Initialize and return the LLM (Groq) instance."""
-    # groq_api_key = os.getenv("GROQ_API_KEY")
-    groq_api_key = st.secrets["GROQ_API_KEY"]
+    groq_api_key = os.getenv("GROQ_API_KEY")
     return ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-8b-8192")
 
 def get_embeddings():
     """Initialize and return HuggingFace embeddings."""
-    # os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
+    os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
     return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 def read_urls_from_txt():
